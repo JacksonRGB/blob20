@@ -1,0 +1,18 @@
+debug = true
+
+
+[chain]
+rpc = 'https://eth-mainnet.g.alchemy.com/v2/yNRpszbYfxuX6NFtG9lZYsZVBGjJNJFt'
+id = 1
+
+[mysql]
+host = 'localhost'
+port = 3306
+user = 'root'
+password = ''
+database = 'blob20'
+max_conn = 20
+max_idle_conn = 10
+
+[server]
+listen = "0.0.0.0:8080"
