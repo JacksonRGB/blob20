@@ -135,13 +135,13 @@ func (s *Sync) processMint(block, blockTime int, tx *types.Transaction) (isMint 
 		return
 	}
 
-	if len(tx.BlobHashes()) != 1 {
-		// 必须只有一笔
+	ok, err := s.d.CheckAttachment(tx.Hash().String())
+	if err != nil {
+		log.WithField("txid", tx.Hash().String()).WithError(err).Error("check attachment")
 		return
 	}
 
-	targetHash := common.HexToHash("01ee8325bc5607a16dd64ff2bcbec7d596b170f31def52615abf6b3f25ceb5a5")
-	if tx.BlobHashes()[0].String() != targetHash.String() {
+	if !ok {
 		return
 	}
 
