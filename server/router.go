@@ -9,5 +9,6 @@ func router(router gin.IRouter) {
 	{
 		api.GET("/minted", getMints)
 		api.GET("/count", getTotalCount)
+		api.GET("/top", getTopAccount)
 	}
 }

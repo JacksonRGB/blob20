@@ -61,3 +61,14 @@ func (d *Dao) GetMintCount() (count int, err error) {
 	err = d.db.Model(&dbmodel.Mint{}).Count(&ct).Error
 	return int(ct), err
 }
+
+type UserAmount struct {
+	Owner string `json:"owner"`
+	Ct    int    `json:"count"`
+}
+
+func (d *Dao) GetTopUsers() (uas []*UserAmount, err error) {
+	err = d.db.Model(&dbmodel.Mint{}).Select("owner, count(*) as ct").
+		Group("owner").Order("ct desc").Limit(50).Find(&uas).Error
+	return
+}

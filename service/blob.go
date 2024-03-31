@@ -1,6 +1,7 @@
 package service
 
 import (
+	"blob-index/dao"
 	"blob-index/model/http"
 	"time"
 
@@ -44,11 +45,18 @@ func (s *Service) GetTotalCount() int {
 	return globalTotalCount
 }
 
+func (s *Service) GetTopUsers() (resp []*dao.UserAmount) {
+	return top50Mints
+}
+
 var globalTotalCount = 0
+
+var top50Mints = []*dao.UserAmount{}
 
 func (s *Service) loopGetTotalCount() {
 	for {
 		globalTotalCount, _ = s.d.GetMintCount()
+		top50Mints, _ = s.d.GetTopUsers()
 		time.Sleep(time.Second * 10)
 	}
 }

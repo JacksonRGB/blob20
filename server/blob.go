@@ -45,3 +45,8 @@ func getTotalCount(c *gin.Context) {
 	ct := srv.GetTotalCount()
 	c.JSON(200, gin.H{"count": ct})
 }
+
+func getTopAccount(c *gin.Context) {
+	rsp := srv.GetTopUsers()
+	c.JSON(200, rsp)
+}
